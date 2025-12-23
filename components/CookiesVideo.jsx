@@ -2,10 +2,10 @@
 
 const Video = () => {
   return (
-    <section className="relative  h-[70vh] md:h-screen overflow-hidden ">
+    <section className="relative  h-screen  md:h-screen overflow-hidden rounded-xl m-10 ">
       {/* Video */}
       <video
-        className="absolute inset-0 p-10 rounded w-full h-full object-cover"
+        className="absolute inset-0  rounded-xl  w-full h-full object-cover "
         autoPlay
         muted
         loop
@@ -17,17 +17,17 @@ const Video = () => {
         />
       </video>
 
-      {/* Overlay (optional) */}
       <div className="absolute inset-0 bg-black/30" />
 
-      {/* Content */}
       <div
         className="
-        relative z-10
+        relative 
         flex flex-col items-center justify-center
         h-full
         text-center
         px-4
+       
+        mt-30
       "
       >
         <h1
@@ -40,6 +40,7 @@ const Video = () => {
           font-serif
           font-normal
           max-w-3xl
+          
         "
         >
           Cozy up with our new cookie collection
