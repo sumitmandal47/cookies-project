@@ -8,6 +8,9 @@ import CookieIngre from "@/components/CookieIngre";
 import WhyJoinSection from "@/components/WhyJoinSection";
 import { Testimonials } from "@/components/Testimonials";
 
+import CookieCard from "../../components/CookiesCard";
+import Move from "../../components/Move";
+
 export default function CookieClubHero() {
   return (
     <>
@@ -46,7 +49,10 @@ export default function CookieClubHero() {
       {/* OTHER SECTIONS */}
       <WhyJoinSection />
       <CookieIngre />
+
       <Testimonials />
+      <Move/>
+      <CookieCard/>
       
       
     </>

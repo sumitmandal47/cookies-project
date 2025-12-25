@@ -1,19 +1,34 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
 
+import "./globals.css";
+import localFont from "next/font/local";
 import Footer from "@/components/Footer";
 import Navbar from "@/components/navbar/Navbar";
+import Contect from "@/components/Contect";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+
+const munchiesFont = localFont({
+  src: [
+    {
+      path: "./fonts/Munchies-Light.woff2",
+      weight: "200",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Munchies-Semibold.woff2",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "./fonts/Munchies-Bold.woff2",
+      weight: "500",
+      style: "normal",
+    },
+  ],
+  variable: "--font-munchies",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,10 +43,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${munchiesFont.variable} font-munchies antialiased  bg-[#fff7e8] pt-14 `}
       >
         <Navbar />
         {children}
+        <Contect/>
         <Footer />
       </body>
     </html>

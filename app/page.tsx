@@ -1,26 +1,28 @@
-import Navbar from "../components/navbar/Navbar"
+
 import CookieVideo from "../components/CookiesVideo"
-import Footer from "@/components/Footer"
+
 import FreshlyBaked from "@/components/FreshlyBaked"
 
 import CookiesBox from "@/components/CookiesBox"
 import { CookieCategories } from "@/components/CookieCategories"
 import CookieIngre from "@/components/CookieIngre"
 import CompanyInfo from "@/components/CompanyInfo"
-import Contact from "@/components/Contect"
+
+import Move from "@/components/Move";
 
 
 const page = () => {
   return (
-    <div className="bg-[#fff7e8]">
+    <div>
       
       <CookieVideo />
       <FreshlyBaked />
       <CookiesBox />
       <CompanyInfo />
+      <Move/>
       <CookieCategories />
       <CookieIngre />
-      <Contact/>
+      
      
     </div>
   );

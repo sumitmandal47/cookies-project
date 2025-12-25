@@ -1,15 +1,15 @@
-import image1 from "@/assets/images/cookie2.png";
-import image2 from "@/assets/images/cookie3.png";
-import image3 from "@/assets/images/cookie4.png";
+import image1 from "@/app/assets/images/cookie1.png";
+import image2 from "@/app/assets/images/cookie1.png";
+import image3 from "@/app/assets/images/cookie1.png";
 import Image from "next/image";
 
 function ShopDropdown() {
   return (
     <div
-      className="absolute left-0 top-full w-full z-0 bg-[#fff6e6] 
+      className="absolute left-0 top-full w-full z-0 bg-[#fff6e6]
       max-h-0 overflow-hidden opacity-0 border-b-0 -translate-y-10
       transition-all duration-500 ease-in-out
-      group-hover:max-h-[600px] group-hover:opacity-100 group-hover:z-10 
+      group-hover:max-h-[600px] group-hover:opacity-100 group-hover:z-10
       group-hover:border-b-[3px] group-hover:translate-y-0 border-[#ff4b22]"
     >
       <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-4 gap-10">

@@ -1,13 +1,16 @@
 
 
+"use client";
+
+import { useState } from "react";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
+  SheetClose,
 } from "@/components/ui/sheet";
-import { useState } from "react";
 
 const countries = [
   { name: "United States", currency: "[$]" },
@@ -28,26 +31,28 @@ const countries = [
 ];
 
 export function SelectCountry() {
-  const [selected, setSelected] = useState("United States");
+  const [selected, setSelected] = useState({
+    name: "United States",
+    currency: "[$]",
+  });
 
-  // Sort alphabetically by country name
   const sortedCountries = [...countries].sort((a, b) =>
     a.name.localeCompare(b.name)
   );
 
   return (
     <Sheet>
-      {/* Trigger button */}
+      {/* Trigger */}
       <SheetTrigger asChild>
         <button className="text-[#ff4d22] font-semibold cursor-pointer">
-          {selected}
+          {selected.name} {selected.currency}
         </button>
       </SheetTrigger>
 
-      {/* Drawer content */}
+      {/* Sheet Content */}
       <SheetContent className="bg-[#fff6e6] text-[#ff4d22] overflow-y-auto">
         <SheetHeader>
-          <SheetTitle className="text-[#ff4d22] text-2xl font-serif mb-4">
+          <SheetTitle className="text-2xl font-serif mb-4">
             Select your country
           </SheetTitle>
         </SheetHeader>
@@ -55,16 +60,19 @@ export function SelectCountry() {
         <ul className="space-y-2">
           {sortedCountries.map((c) => (
             <li key={c.name}>
-              <button
-                onClick={() => setSelected(c.name)}
-                className={`w-full text-left px-3 py-2 rounded-md transition ${
-                  selected === c.name
-                    ? "bg-pink-200" // highlight
-                    : "hover:bg-pink-100"
-                }`}
-              >
-                {c.name} {c.currency}
-              </button>
+              <SheetClose asChild>
+                <button
+                  onClick={() => setSelected(c)}
+                  className={`w-full flex justify-between px-3 py-2 rounded-md transition ${
+                    selected.name === c.name
+                      ? "bg-pink-200"
+                      : "hover:bg-pink-100"
+                  }`}
+                >
+                  <span>{c.name}</span>
+                  <span>{c.currency}</span>
+                </button>
+              </SheetClose>
             </li>
           ))}
         </ul>

@@ -14,27 +14,27 @@ import {
 
 import { Cookies } from "@/data/cookiesData";
 
-export default function FreshlyBaked() {
+export default function CookieCard() {
   const [api, setApi] = useState(null);
   const router = useRouter();
+
+  const next = () => api?.scrollNext();
+  const prev = () => api?.scrollPrev();
 
   const handleClick = (id) => {
     router.push(`/cookies/${id}`);
   };
 
-  const next = () => api?.scrollNext();
-  const prev = () => api?.scrollPrev();
-
   return (
     <Carousel setApi={setApi} className="w-full p-6 md:p-10 mx-auto">
       <div className="max-w-7xl mx-auto">
-        
-        <div className="flex justify-between items-center mb-10">
-          <h2 className="text-4xl md:text-6xl font-serif text-[#ff4b22]">
-            Freshly baked
+        {/* HEADER */}
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-3xl md:text-4xl font-serif text-[#ff4b22]">
+            This Month&apos;s Star Cookie
           </h2>
 
-          <div className="flex gap-5">
+          <div className="flex gap-4">
             <button
               onClick={prev}
               className="w-10 h-10 border border-[#ff4b22] rounded-full flex items-center justify-center text-[#ff4b22] hover:bg-[#ff4b22] hover:text-white transition"
@@ -51,7 +51,7 @@ export default function FreshlyBaked() {
           </div>
         </div>
 
-      
+        {/* CARDS */}
         <CarouselContent>
           {Cookies.map((cookie) => (
             <CarouselItem
@@ -59,11 +59,13 @@ export default function FreshlyBaked() {
               className="basis-full sm:basis-1/2 md:basis-1/3 cursor-pointer"
               onClick={() => handleClick(cookie.id)}
             >
-              <div className="relative ">
-                <span className="absolute top-4 right-4 bg-pink-100 text-[#ff4b22] font-extrabold px-3 py-1 rounded">
+              <div className="relative">
+                {/* Badge */}
+                <span className="absolute top-4 right-4 bg-pink-100 text-[#ff4b22] font-bold px-3 py-1 rounded">
                   {cookie.name}
                 </span>
 
+                {/* Image */}
                 <Image
                   src={cookie.images[0]}
                   alt={cookie.title}
@@ -72,8 +74,8 @@ export default function FreshlyBaked() {
                   className="rounded-2xl object-cover"
                 />
 
-               
-                <CardContent className="flex flex-col items-center justify-center text-center text-[#ff4b22]">
+                {/* Content */}
+                <CardContent className="flex flex-col items-center text-center text-[#ff4b22]">
                   <p className="text-lg">{cookie.title}</p>
                   <p className="font-bold">${cookie.price.toFixed(2)}</p>
                 </CardContent>
