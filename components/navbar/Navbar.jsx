@@ -5,15 +5,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Menu, X } from "lucide-react";
-
+import ShopDropdown from "../ShopDropdown";
 import Logo from "@/app/assets/images/logo.png";
-import ShopAllMegaMenu from "./ShopAllMegaMenu";
 import MyBag from "../MyBag";
 
 import { SelectCountry } from "../SelectCountry";
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
+ const [shopOpen, setShopOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openBag, setOpenBag] = useState(false);
   const [countryOpen, setCountryOpen] = useState(false);
@@ -56,8 +55,8 @@ export default function Navbar() {
               onMouseEnter={() => setShopOpen(true)}
               onMouseLeave={() => setShopOpen(false)}
             >
-              <span>Shop all</span>
-              {shopOpen && <ShopAllMegaMenu />}
+              <span className="cursor-pointer">Shop all</span>
+             
             </li>
 
             <li>
@@ -79,7 +78,7 @@ export default function Navbar() {
               US [$]
             </button> */}
             <SelectCountry
-               className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
+              className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
               open={countryOpen}
               onClose={() => setCountryOpen(false)}
             />
@@ -102,15 +101,13 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-
+        {shopOpen && <ShopDropdown />}
         {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden bg-[#fff7e8] px-6 py-6 border-t">
             <ul className="flex flex-col gap-6 text-orange-600 text-lg">
               <li>
-                <Link href="/shop" onClick={() => setMobileOpen(false)}>
-                  Shop all
-                </Link>
+                <span>Shop all</span>
               </li>
               <li>
                 <Link
