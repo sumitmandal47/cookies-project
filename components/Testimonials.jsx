@@ -82,26 +82,14 @@ export function Testimonials() {
                 <Card className="border border-[#ff4b22]/20 rounded-2xl h-full bg-[#fff6e6] hover:shadow-lg transition-shadow duration-300">
                   <CardContent className="flex flex-col justify-between h-full p-8">
                     {/* Top: Stars & Icon */}
-                    <div className="flex justify-between items-start mb-6">
-                      <div className="flex gap-1">
-                        {[...Array(5)].map((_, index) => (
-                          <Star
-                            key={index}
-                            size={16}
-                            fill="#ff4b22"
-                            className="text-[#ff4b22]"
-                          />
-                        ))}
-                      </div>
-                      <Quote className="text-[#ff4b22]/20 w-10 h-10" />
-                    </div>
+                   
 
-                    {/* Middle: Content */}
+                
                     <p className="text-lg text-[#ff4b22]/80 font-medium leading-relaxed mb-8">
                       {testimonial.text}
                     </p>
 
-                    {/* Bottom: Author */}
+                  
                     <div className="flex items-center gap-4 mt-auto">
                       <div className="w-10 h-10 rounded-full bg-[#ff4b22]/10 flex items-center justify-center">
                         <User className="text-[#ff4b22] w-5 h-5" />

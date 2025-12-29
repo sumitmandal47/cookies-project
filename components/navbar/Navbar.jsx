@@ -8,11 +8,11 @@ import { ShoppingBag, Menu, X } from "lucide-react";
 import ShopDropdown from "../ShopDropdown";
 import Logo from "@/app/assets/images/logo.png";
 import MyBag from "../MyBag";
-
 import { SelectCountry } from "../SelectCountry";
+
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
- const [shopOpen, setShopOpen] = useState(false);
+  const [shopOpen, setShopOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openBag, setOpenBag] = useState(false);
   const [countryOpen, setCountryOpen] = useState(false);
@@ -44,39 +44,43 @@ export default function Navbar() {
               width={350}
               height={80}
               priority
-              className="w-[180px] md:w-[260px] lg:w-[350px] object-contain"
+              className="w-45 md:w-65 lg:w-87.5 object-contain"
             />
           </Link>
 
-          {/* Desktop Menu */}
           <ul className="hidden md:flex gap-10 text-orange-600 text-xl">
+            {/* SHOP ALL */}
             <li
               className="relative cursor-pointer"
               onMouseEnter={() => setShopOpen(true)}
               onMouseLeave={() => setShopOpen(false)}
             >
-              <span className="cursor-pointer">Shop all</span>
-             
+              <span>Shop all</span>
+
+              {shopOpen && (
+                <div
+                  
+                  onMouseEnter={() => setShopOpen(true)}
+                  onMouseLeave={() => setShopOpen(false)}
+                >
+                  <ShopDropdown />
+                </div>
+              )}
             </li>
 
             <li>
               <Link href="/munchiesBundle">Munchies bundle</Link>
             </li>
             <li>
-              <Link href="/nutty">Nutty</Link>
+              <Link href="/product">Nutty</Link>
             </li>
             <li>
               <Link href="/cookiesClub">Cookies Club</Link>
             </li>
           </ul>
 
+          {/* Right icons */}
           <div className="flex items-center gap-4 text-orange-600">
-            {/* <button
-              onClick={() => setCountryOpen(true)}
-              className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
-            >
-              US [$]
-            </button> */}
             <SelectCountry
               className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
               open={countryOpen}
@@ -101,7 +105,7 @@ export default function Navbar() {
             </button>
           </div>
         </nav>
-        {shopOpen && <ShopDropdown />}
+
         {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden bg-[#fff7e8] px-6 py-6 border-t">
@@ -129,12 +133,6 @@ export default function Navbar() {
               </li>
             </ul>
 
-            <button
-              onClick={() => setCountryOpen(true)}
-              className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
-            >
-              US[$]
-            </button>
             <SelectCountry
               open={countryOpen}
               onClose={() => setCountryOpen(false)}

@@ -14,6 +14,7 @@ import {
 
 import { Cookies } from "@/data/cookiesData";
 
+
 export default function CookieCard() {
   const [api, setApi] = useState(null);
   const router = useRouter();
@@ -24,6 +25,7 @@ export default function CookieCard() {
   const handleClick = (id) => {
     router.push(`/cookies/${id}`);
   };
+
 
   return (
     <Carousel setApi={setApi} className="w-full p-6 md:p-10 mx-auto">
@@ -51,7 +53,7 @@ export default function CookieCard() {
           </div>
         </div>
 
-        {/* CARDS */}
+        
         <CarouselContent>
           {Cookies.map((cookie) => (
             <CarouselItem
@@ -60,12 +62,12 @@ export default function CookieCard() {
               onClick={() => handleClick(cookie.id)}
             >
               <div className="relative">
-                {/* Badge */}
+                
                 <span className="absolute top-4 right-4 bg-pink-100 text-[#ff4b22] font-bold px-3 py-1 rounded">
                   {cookie.name}
                 </span>
 
-                {/* Image */}
+               
                 <Image
                   src={cookie.images[0]}
                   alt={cookie.title}

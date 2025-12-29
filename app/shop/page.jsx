@@ -85,7 +85,7 @@ function ShopDropdown() {
       className="absolute left-0 top-full w-full z-0 bg-[#fff6e6] 
       max-h-0 overflow-hidden opacity-0 border-b-0 -translate-y-10
       transition-all duration-500 ease-in-out
-      group-hover:max-h-[600px] group-hover:opacity-100 group-hover:z-10 
+      group-hover:max-h-150 group-hover:opacity-100 group-hover:z-10 
       group-hover:border-b-[3px] group-hover:translate-y-0 border-[#ff4b22]"
     >
       <div className="max-w-7xl mx-auto px-8 py-10 grid grid-cols-4 gap-10">
