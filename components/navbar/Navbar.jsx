@@ -72,7 +72,7 @@ export default function Navbar() {
               <Link href="/munchiesBundle">Munchies bundle</Link>
             </li>
             <li>
-              <Link href="/product">Nutty</Link>
+              <Link href="/products">Nutty</Link>
             </li>
             <li>
               <Link href="/cookiesClub">Cookies Club</Link>

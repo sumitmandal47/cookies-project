@@ -6,7 +6,6 @@ import {
 } from "@/components/ui/accordion";
 import { ChevronDown } from "lucide-react";
 import { medusa } from "../../../lib/medusa";
-import Image from "next/image";
 import { Button } from "../../../components/ui/button";
 
 
@@ -21,11 +20,10 @@ const page = async ({ params }) => {
       {/* {JSON.stringify(product, null, 2)} */}
       <div className="min-h-screen bg-[#fff6e6] py-10 px-4">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-         
           <div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-6 sticky top-10 h-fit">
             <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-visible py-2 md:py-0">
               <img
-                key={product.id}
+                key={product.slug}
                 src={product.thumbnail}
                 alt="thumbnail"
                 className={`w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-[#ff4b22] transition-all duration-300 `}
@@ -45,7 +43,7 @@ const page = async ({ params }) => {
             </div>
           </div>
 
-         {/* right */}
+          {/* right */}
           <div className="lg:col-span-5 flex flex-col text-[#ff4b22]">
             <p className="text-xs md:text-sm font-bold tracking-widest mb-4">
               HOME / COOKIES /{product.title.toUpperCase()}
@@ -55,7 +53,7 @@ const page = async ({ params }) => {
               {product.title}
             </h1>
 
-            <p className="text-3xl font-medium mb-6">$2.99</p>
+            <p className="text-3xl font-medium mb-6"> From $ 2.99</p>
 
             <p className="text-lg leading-relaxed opacity-90 mb-8 font-light">
               {product.description}
@@ -63,9 +61,15 @@ const page = async ({ params }) => {
 
             <div className="relative mb-6 inline-block w-fit">
               <select className="appearance-none border border-[#ff4b22] text-[#ff4b22] rounded-xl pl-6 pr-12 py-3 text-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#ff4b22]/20 bg-[#fff6e6]">
-                <option>4-pack</option>
-                <option>6-pack</option>
-                <option>8-pack</option>
+                {product.options.map((option) => (
+                  <optgroup key={option.id} label={option.title}>
+                    {option.values.map((value) => (
+                      <option key={value.id} value={value.value}>
+                        {value.value}
+                      </option>
+                    ))}
+                  </optgroup>
+                ))}
               </select>
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" />
             </div>
