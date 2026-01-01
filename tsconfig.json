@@ -20,17 +20,28 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    },
-    
+    }
   },
-  
+
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
-    "**/*.mts"
-, "components/Footer.jsx", "components/FreshlyBaked.jsx", "app/cookiesDetails/[id]/page.jsx", "components/CheckoutContent.jsx", "components/CompanyInfo.jsx", "components/Contect.jsx", "components/CookieCategories.jsx", "components/CookieIngre.jsx", "components/MyBag.jsx", "components/SelectCountry.jsx", "components/ShopDropdown.jsx", "components/Testimonials.jsx"  ],
+    "**/*.mts",
+    "components/Footer.jsx",
+    "components/FreshlyBaked.jsx",
+    "app/cookiesDetails/[id]/page.jsx",
+    "components/CheckoutContent.jsx",
+    "components/CompanyInfo.jsx",
+    "components/Contect.jsx",
+    "components/CookieCategories.jsx",
+    "components/CookieIngre.jsx",
+    "components/MyBag.jsx",
+    "components/SelectCountry.jsx",
+    "components/navbar/ShopDropdown.jsx",
+    "components/Testimonials.jsx"
+  ],
   "exclude": ["node_modules"]
 }

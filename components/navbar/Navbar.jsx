@@ -1,21 +1,20 @@
-
 "use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShoppingBag, Menu, X } from "lucide-react";
-import ShopDropdown from "../ShopDropdown";
+import ShopDropdown from "./ShopDropdown";
 import Logo from "@/app/assets/images/logo.png";
 import MyBag from "../MyBag";
 import { SelectCountry } from "../SelectCountry";
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [shopOpen, setShopOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openBag, setOpenBag] = useState(false);
   const [countryOpen, setCountryOpen] = useState(false);
+  // const [ShopOpen, setShopOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,7 +27,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 font-munchies transition-all
+        className={` fixed top-0 left-0 w-full z-50 font-munchies transition-all
         ${
           scrolled
             ? "border-b-2 border-[#ff4b22] shadow-sm"
@@ -36,7 +35,6 @@ export default function Navbar() {
         }`}
       >
         <nav className="flex items-center justify-between px-6 py-4 md:px-8 lg:px-20 bg-[#fff7e8]">
-          {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
               src={Logo}
@@ -48,24 +46,12 @@ export default function Navbar() {
             />
           </Link>
 
-          <ul className="hidden md:flex gap-10 text-orange-600 text-xl">
-            {/* SHOP ALL */}
-            <li
-              className="relative cursor-pointer"
-              onMouseEnter={() => setShopOpen(true)}
-              onMouseLeave={() => setShopOpen(false)}
-            >
-              <span>Shop all</span>
-
-              {shopOpen && (
-                <div
-                  
-                  onMouseEnter={() => setShopOpen(true)}
-                  onMouseLeave={() => setShopOpen(false)}
-                >
-                  <ShopDropdown />
-                </div>
-              )}
+          <ul className="hidden md:flex  gap-10 text-orange-600 text-xl">
+            <li className="group relative ">
+              <span className="cursor-pointer">Shop all</span>
+              <div className="absolute left-0 top-full w-screen hidden group-hover:block">
+                <ShopDropdown />
+              </div>
             </li>
 
             <li>
@@ -79,7 +65,6 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* Right icons */}
           <div className="flex items-center gap-4 text-orange-600">
             <SelectCountry
               className="hidden md:block text-xl font-medium hover:underline cursor-pointer"
@@ -96,7 +81,6 @@ export default function Navbar() {
 
             <MyBag open={openBag} onClose={() => setOpenBag(false)} />
 
-            {/* Mobile Menu Button */}
             <button
               className="md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}
@@ -106,7 +90,6 @@ export default function Navbar() {
           </div>
         </nav>
 
-        {/* Mobile Menu */}
         {mobileOpen && (
           <div className="md:hidden bg-[#fff7e8] px-6 py-6 border-t">
             <ul className="flex flex-col gap-6 text-orange-600 text-lg">

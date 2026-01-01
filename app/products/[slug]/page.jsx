@@ -14,7 +14,6 @@ const page = async ({ params }) => {
   const { slug } = await params;
   const { product } = await medusa.products.retrieve(slug);
 
-  
   return (
     <div className="">
       {/* {JSON.stringify(product, null, 2)} */}
@@ -23,7 +22,7 @@ const page = async ({ params }) => {
           <div className="lg:col-span-7 flex flex-col-reverse md:flex-row gap-6 sticky top-10 h-fit">
             <div className="flex md:flex-col gap-4 overflow-x-auto md:overflow-visible py-2 md:py-0">
               <img
-                key={product.slug}
+                key={product.id}
                 src={product.thumbnail}
                 alt="thumbnail"
                 className={`w-20 h-20 object-cover rounded-xl cursor-pointer border-2 border-[#ff4b22] transition-all duration-300 `}
@@ -33,6 +32,7 @@ const page = async ({ params }) => {
             <div className="flex-1 bg-[#eedcc0] rounded-3xl aspect-square md:aspect-4/3 flex items-center justify-center overflow-hidden  relative">
               <div className="absolute top-6 right-6 bg-pink-200 text-[#ff4b22] px-3 py-1 font-bold tracking-widest text-xs rounded uppercase z-10">
                 {product.subtitle}
+                
               </div>
 
               <img

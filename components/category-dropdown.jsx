@@ -86,7 +86,7 @@ const handleChange = (selected) => {
         instanceId="category-select"
         isMulti
         options={options}
-        // value={selectedCategories}
+        value={selectedCategories}
         onChange={handleChange}
         isLoading={isLoading}
         placeholder=" Categories"

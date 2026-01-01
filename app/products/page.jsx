@@ -7,14 +7,10 @@ import ClearFilterButton from "../../components/ClearFilterButton";
 
 export default async function Products({ searchParams }) {
   const resolvedSearchParams = await searchParams;
-
   const categoryParam = resolvedSearchParams.productCategories;
   const collectionParam = resolvedSearchParams.collections;
-
   const categoryIds = categoryParam ? categoryParam.split(",") : [];
-
   const collectionIds = collectionParam ? collectionParam.split(",") : [];
-
   const filters = { limit: 15 };
 
   if (categoryIds.length > 0) {
@@ -24,9 +20,7 @@ export default async function Products({ searchParams }) {
   if (collectionIds.length > 0) {
     filters.collection_id = collectionIds;
   }
-
   let products = [];
-
   try {
     const res = await medusa.products.list(filters);
     products = res.products ?? [];
@@ -46,13 +40,13 @@ export default async function Products({ searchParams }) {
         <ClearFilterButton />
       </div>
 
-      <div className="grid grid-cols-4 gap-8">
+      <div className="grid grid-cols-4  gap-8">
         {products.length > 0 ? (
           products.map((product) => (
             <Link
               href={`/products/${product.id}`}
               key={product.id}
-              className="group block bg-[#fff6e6] rounded-lg overflow-hidden"
+              className="group block bg-[#fff6e6] rounded-lg overflow-hidden "
             >
               <div className="relative">
                 <img
@@ -74,9 +68,13 @@ export default async function Products({ searchParams }) {
             </Link>
           ))
         ) : (
-          <div>
-            <p className="text-[#ff4b22] text-4xl ">No products found</p>
-            <p>We couldnt find any products matching your current filters.</p>
+          <div className="w-full">
+            <p className="text-[#ff4b22] text-4xl font-bold ">
+              No products found
+            </p>
+            <p className="text-[#ff4b22] text-2xl ">
+              We couldnt find any products matching your current filters.
+            </p>
           </div>
         )}
       </div>
