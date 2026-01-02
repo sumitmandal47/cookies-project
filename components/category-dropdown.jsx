@@ -83,7 +83,7 @@ const handleChange = (selected) => {
   return (
     <div className="w-64 bg-[#fff6e6]">
       <Select
-        instanceId="category-select"
+        // instanceId="category-select"
         isMulti
         options={options}
         value={selectedCategories}

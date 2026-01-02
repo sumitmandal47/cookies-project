@@ -27,7 +27,7 @@ export default async function Products({ searchParams }) {
   } catch (err) {
     console.error("Medusa 400 error:", err);
   }
-
+  // console.log(JSON.stringify(products, null, 2));
   return (
     <div className="bg-[#fff6e6] min-h-screen p-8">
       <h1 className="text-6xl font-serif text-[#ff4b22] mb-8">

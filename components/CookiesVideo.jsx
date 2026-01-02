@@ -1,9 +1,8 @@
 "use client";
-
+import Link from "next/link";
 const Video = () => {
   return (
     <section className="relative  h-screen  md:h-screen overflow-hidden rounded-xl m-10 ">
-      {/* Video */}
       <video
         className="absolute inset-0  rounded-xl  w-full h-full object-cover "
         autoPlay
@@ -26,7 +25,6 @@ const Video = () => {
         h-full
         text-center
         px-4
-       
         mt-30
       "
       >
@@ -46,22 +44,25 @@ const Video = () => {
           Cozy up with our new cookie collection
         </h1>
 
-        <button
-          className="
+        <Link href={"/products"}>
+          <button
+            className="
           mt-6 md:mt-8
           px-6 md:px-8
           py-3 md:py-4
+          hover:border-[#ff5522] hover:border
           bg-[#ff5522]
           text-white
           rounded-full
           font-semibold
           text-lg md:text-2xl
-          hover:bg-white hover:text-[#ff5522]
-          transition
+          hover:bg-[#fff7e8] hover:text-[#ff5522]
+          cursor-pointer
         "
-        >
-          Shop now
-        </button>
+          >
+            Shop now
+          </button>
+        </Link>
       </div>
     </section>
   );

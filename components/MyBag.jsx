@@ -12,6 +12,7 @@ import {
   SheetTitle,
   SheetFooter,
 } from "@/components/ui/sheet";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
@@ -86,7 +87,7 @@ export default function MyBag({ open, onClose }) {
           </button> */}
         </SheetHeader>
 
-        {/* CART */}
+       
         <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
           {cart.map((item) => (
             <Card
@@ -144,7 +145,6 @@ export default function MyBag({ open, onClose }) {
             </Card>
           ))}
 
-          {/* SUGGESTIONS */}
           <div>
             <div className="flex justify-between items-center mb-4">
               <h3 className="text-2xl font-serif text-[#ff4b22]">
@@ -172,7 +172,7 @@ export default function MyBag({ open, onClose }) {
               <div className="flex-1">
                 <h3 className="text-[#ff4b22]">{suggestions[0].name}</h3>
                 <p className="text-sm text-[#ff4b22]">
-                  {suggestions[0].pack} / €{suggestions[0].price.toFixed(2)}
+                  {suggestions[0].pack} /${suggestions[0].price.toFixed(2)}
                 </p>
               </div>
 
@@ -187,7 +187,7 @@ export default function MyBag({ open, onClose }) {
           </div>
         </div>
 
-        {/* FOOTER */}
+       
         <SheetFooter className="border-t border-[#ff4b22] p-4">
           <div className="flex justify-between mb-2">
             <span className="text-[#ff4b22]">Subtotal</span>

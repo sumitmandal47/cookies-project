@@ -1,8 +1,10 @@
 import Image from "next/image";
 
 import cookieImg from "../app/assets/images/cookie10.png";
+import Link from "next/link";
 
 const JoinTheClub = () => {
+
   return (
     <>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 md:px-12 py-10 w-full">
@@ -26,10 +28,16 @@ const JoinTheClub = () => {
             cookies, delivered straight to you.
           </p>
 
-          <div className="flex justify-center md:justify-start">
-            <button className="bg-[#ff4b22] hover:bg-[#e24d28] text-white text-base sm:text-lg px-8 py-6 rounded-full">
-              Join the club
-            </button>
+          <div className="flex justify-center  items-center">
+            <Link href={'/'}>
+              <button
+                className="bg-[#ff5522]
+              hover:border-[#ff5522]  hover:border  text-white  rounded-full  font-semibold md:text-2xl
+          hover:bg-[#fff7e8] hover:text-[#ff5522] text-base sm:text-lg px-7 py-3  cursor-pointer "
+              >
+                Join the club
+              </button>
+            </Link>
           </div>
         </div>
       </section>

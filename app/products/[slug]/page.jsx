@@ -9,7 +9,6 @@ import { medusa } from "../../../lib/medusa";
 import { Button } from "../../../components/ui/button";
 
 
-
 const page = async ({ params }) => {
   const { slug } = await params;
   const { product } = await medusa.products.retrieve(slug);
@@ -32,7 +31,6 @@ const page = async ({ params }) => {
             <div className="flex-1 bg-[#eedcc0] rounded-3xl aspect-square md:aspect-4/3 flex items-center justify-center overflow-hidden  relative">
               <div className="absolute top-6 right-6 bg-pink-200 text-[#ff4b22] px-3 py-1 font-bold tracking-widest text-xs rounded uppercase z-10">
                 {product.subtitle}
-                
               </div>
 
               <img
@@ -74,7 +72,10 @@ const page = async ({ params }) => {
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" />
             </div>
 
-            <button className="w-full hover:bg-[#ff4b22] hover:text-[#fff6e6] border border-[#ff4b22] py-4 rounded-full text-2xl font-serif mb-12 bg-[#fff6e6] text-[#ff4b22] transition-all duration-300 ">
+            <button
+              className="w-full hover:bg-[#ff4b22] hover:text-[#fff6e6] border border-[#ff4b22] py-4 rounded-full text-2xl font-serif mb-12 bg-[#fff6e6] text-[#ff4b22] transition-all duration-300 "
+        
+            >
               Add to cart
             </button>
 

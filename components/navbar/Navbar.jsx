@@ -57,6 +57,7 @@ export default function Navbar() {
             <li>
               <Link href="/munchiesBundle">Munchies bundle</Link>
             </li>
+            
             <li>
               <Link href="/products">Nutty</Link>
             </li>
