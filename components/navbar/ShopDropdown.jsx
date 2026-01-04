@@ -86,7 +86,7 @@ function ShopDropdown() {
                   className="mx-auto mb-3 rounded-xl"
                 />
                 <h4 className="text-[#ff4b22] text-sm mb-2">{product.title}</h4>
-                <button className="px-4 py-2 border border-[#ff4b22] rounded-full text-[#ff4b22] hover:bg-[#ff4b22] hover:text-white transition">
+                <button className="px-4 py-2 border border-[#ff4b22] rounded-full text-[#ff4b22] hover:bg-[#ff4b22] hover:text-[#fff7e8] transition">
                   Shop now
                 </button>
               </Link>

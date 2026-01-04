@@ -5,13 +5,13 @@ import CollectionDropdown from "../../components/collections";
 import Link from "next/link";
 import ClearFilterButton from "../../components/ClearFilterButton";
 
-export default async function Products({ searchParams }) {
+export default async function Products({ searchParams}) {
   const resolvedSearchParams = await searchParams;
   const categoryParam = resolvedSearchParams.productCategories;
   const collectionParam = resolvedSearchParams.collections;
   const categoryIds = categoryParam ? categoryParam.split(",") : [];
   const collectionIds = collectionParam ? collectionParam.split(",") : [];
-  const filters = { limit: 15 };
+  const filters = { limit: 12 };
 
   if (categoryIds.length > 0) {
     filters.category_id = categoryIds;
@@ -27,7 +27,11 @@ export default async function Products({ searchParams }) {
   } catch (err) {
     console.error("Medusa 400 error:", err);
   }
+  
   // console.log(JSON.stringify(products, null, 2));
+
+
+
   return (
     <div className="bg-[#fff6e6] min-h-screen p-8">
       <h1 className="text-6xl font-serif text-[#ff4b22] mb-8">
@@ -40,7 +44,7 @@ export default async function Products({ searchParams }) {
         <ClearFilterButton />
       </div>
 
-      <div className="grid grid-cols-4  gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {products.length > 0 ? (
           products.map((product) => (
             <Link
@@ -63,7 +67,7 @@ export default async function Products({ searchParams }) {
                 <h2 className="text-lg font-semibold text-[#ff4b22]">
                   {product.title}
                 </h2>
-                <p className="text-sm text-[#ff4b22]">From $2.99</p>
+                <p className="text-sm text-[#ff4b22]">From $299</p>
               </CardContent>
             </Link>
           ))

@@ -57,7 +57,7 @@ export default function Navbar() {
             <li>
               <Link href="/munchiesBundle">Munchies bundle</Link>
             </li>
-            
+
             <li>
               <Link href="/products">Nutty</Link>
             </li>
@@ -79,9 +79,7 @@ export default function Navbar() {
                 0
               </span>
             </button>
-
             <MyBag open={openBag} onClose={() => setOpenBag(false)} />
-
             <button
               className="md:hidden"
               onClick={() => setMobileOpen(!mobileOpen)}

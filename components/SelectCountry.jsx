@@ -69,8 +69,10 @@ export function SelectCountry() {
                       : "hover:bg-pink-100"
                   }`}
                 >
-                  <span>{c.name}</span>
-                  <span>{c.currency}</span>
+                  <div className="flex justify-between items-center gap-3">
+                    <span>{c.name}</span>
+                    <span>{c.currency}</span>
+                  </div>
                 </button>
               </SheetClose>
             </li>

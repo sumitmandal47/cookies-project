@@ -7,12 +7,13 @@ import {
 import { ChevronDown } from "lucide-react";
 import { medusa } from "../../../lib/medusa";
 import { Button } from "../../../components/ui/button";
+import AddToCartButton from "../../../components/AddToCartButton";
 
 
 const page = async ({ params }) => {
   const { slug } = await params;
   const { product } = await medusa.products.retrieve(slug);
-
+  // console.log(JSON.stringify(product, null, 2));
   return (
     <div className="">
       {/* {JSON.stringify(product, null, 2)} */}
@@ -51,7 +52,9 @@ const page = async ({ params }) => {
               {product.title}
             </h1>
 
-            <p className="text-3xl font-medium mb-6"> From $ 2.99</p>
+            <p className="text-3xl font-medium mb-6">
+              From $2.99
+            </p>
 
             <p className="text-lg leading-relaxed opacity-90 mb-8 font-light">
               {product.description}
@@ -72,12 +75,15 @@ const page = async ({ params }) => {
               <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 pointer-events-none" />
             </div>
 
-            <button
+            {/* <button
               className="w-full hover:bg-[#ff4b22] hover:text-[#fff6e6] border border-[#ff4b22] py-4 rounded-full text-2xl font-serif mb-12 bg-[#fff6e6] text-[#ff4b22] transition-all duration-300 "
         
             >
               Add to cart
-            </button>
+            </button> */}
+            <div>
+              <AddToCartButton variantId={product.variants[0].id} />
+            </div>
 
             <div className="bg-pink-200 p-6 rounded-2xl mb-10">
               <h2 className="text-2xl font-serif text-[#ff4b22] mb-4">

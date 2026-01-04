@@ -1,10 +1,8 @@
 
+
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Image from "next/image";
-
 import {
   Sheet,
   SheetContent,
@@ -16,87 +14,53 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-import { Trash2, ChevronLeft, ChevronRight } from "lucide-react";
+import { Trash2 } from "lucide-react";
 
-import image1 from "@/app/assets/images/cookie1.png";
-import image2 from "@/app/assets/images/cookie2.png";
+import { useCartStore } from "../store/useCartStore";
 
-export default function MyBag({ open, onClose }) {
+export default function MyBag() {
   const router = useRouter();
 
-  const [cart, setCart] = useState([
-    {
-      id: 1,
-      name: "Ultimate Chocolate Chip Pack",
-      pack: "4-Pack",
-      price: 2.76,
-      image: image1,
-      qty: 1,
-    },
-  ]);
+  const cart = useCartStore((s) => s.cart);
+  const isBagOpen = useCartStore((s) => s.isBagOpen);
+  const closeBag = useCartStore((s) => s.closeBag);
+  const updateQty = useCartStore((s) => s.updateQty);
+  const removeItem = useCartStore((s) => s.removeItem);
 
-  const suggestions = [
-    {
-      id: 2,
-      name: "Matcha Dream",
-      pack: "8-Pack",
-      price: 2.76,
-      image: image2,
-    },
-  ];
+  const items = cart?.items || [];
 
-  const increaseQty = (id) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id ? { ...item, qty: item.qty + 1 } : item
-      )
-    );
-  };
+  const subtotalCents = items.reduce(
+    (sum, item) => sum + item.unit_price * item.quantity,
+    0
+  );
 
-  const decreaseQty = (id) => {
-    setCart((prev) =>
-      prev.map((item) =>
-        item.id === id && item.qty > 1 ? { ...item, qty: item.qty - 1 } : item
-      )
-    );
-  };
-
-  const removeItem = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
-  };
-
-  const addSuggestion = (item) => {
-    setCart((prev) => [...prev, { ...item, qty: 1 }]);
-  };
-
-  const subtotal = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const subtotal = subtotalCents / 100;
 
   return (
-    <Sheet open={open} onOpenChange={onClose}>
+    <Sheet open={isBagOpen} onOpenChange={closeBag}>
       <SheetContent
         side="right"
         className="bg-[#fff8f0] w-[400px] flex flex-col p-0"
       >
-        <SheetHeader className="flex flex-row justify-between items-center border-[#ff4b22] border-b p-4">
+        <SheetHeader className="flex flex-row justify-between items-center border-b border-[#ff4b22] p-4">
           <SheetTitle className="text-3xl font-serif text-[#ff4b22]">
-            My Bag ({cart.length})
+            My Bag ({items.length})
           </SheetTitle>
-
-          {/* <button onClick={onClose}>
-            <X className="text-[#ff4b22]" />
-          </button> */}
         </SheetHeader>
 
-       
         <div className="flex-1 overflow-y-auto px-4 py-6 space-y-6">
-          {cart.map((item) => (
+          {items.length === 0 && (
+            <p className="text-center text-[#ff4b22]">Your bag is empty 🍪</p>
+          )}
+
+          {items.map((item) => (
             <Card
               key={item.id}
               className="flex gap-4 p-4 bg-[#fff8f0] border-[#ff4b22] rounded-xl"
             >
-              <Image
-                src={item.image}
-                alt={item.name}
+              <img
+                src={item.thumbnail}
+                alt={item.title}
                 width={80}
                 height={80}
                 className="rounded-md border"
@@ -106,28 +70,33 @@ export default function MyBag({ open, onClose }) {
                 <div className="flex justify-between">
                   <div>
                     <h3 className="font-semibold text-[#ff4b22]">
-                      {item.name}
+                      {item.title}
                     </h3>
-                    <p className="text-sm text-[#ff4b22]">{item.pack}</p>
+                    {/* <p className="text-sm text-[#ff4b22]">
+                      {item.variant.title}
+                    </p> */}
                   </div>
 
                   <p className="font-bold text-[#ff4b22]">
-                    ${item.price.toFixed(2)}
+                    {item.unit_price}
                   </p>
                 </div>
 
-                <div className="flex items-center gap-2 mt-3">
+              
+                <div className="flex items-center gap-3 mt-3">
                   <button
-                    onClick={() => decreaseQty(item.id)}
+                    onClick={() =>
+                      item.quantity > 1 && updateQty(item.id, item.quantity - 1)
+                    }
                     className="px-3 text-lg font-bold text-[#ff4b22]"
                   >
                     −
                   </button>
 
-                  <span>{item.qty}</span>
+                  <span>{item.quantity}</span>
 
                   <button
-                    onClick={() => increaseQty(item.id)}
+                    onClick={() => updateQty(item.id, item.quantity + 1)}
                     className="px-3 text-lg font-bold text-[#ff4b22]"
                   >
                     +
@@ -144,52 +113,11 @@ export default function MyBag({ open, onClose }) {
               </div>
             </Card>
           ))}
-
-          <div>
-            <div className="flex justify-between items-center mb-4">
-              <h3 className="text-2xl font-serif text-[#ff4b22]">
-                You might also like
-              </h3>
-
-              <div className="flex gap-2 text-[#ff4b22] ">
-                <Button variant="outline" size="icon">
-                  <ChevronLeft />
-                </Button>
-                <Button variant="outline" size="icon">
-                  <ChevronRight />
-                </Button>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4 p-4 border-[#ff4b22] rounded-xl bg-[#fff8f0]">
-              <Image
-                src={suggestions[0].image}
-                alt={suggestions[0].name}
-                width={60}
-                height={80}
-              />
-
-              <div className="flex-1">
-                <h3 className="text-[#ff4b22]">{suggestions[0].name}</h3>
-                <p className="text-sm text-[#ff4b22]">
-                  {suggestions[0].pack} /${suggestions[0].price.toFixed(2)}
-                </p>
-              </div>
-
-              <Button
-                className="text-[#ff4b22]"
-                variant="outline"
-                onClick={() => addSuggestion(suggestions[0])}
-              >
-                Add +
-              </Button>
-            </div>
-          </div>
         </div>
 
        
         <SheetFooter className="border-t border-[#ff4b22] p-4">
-          <div className="flex justify-between mb-2">
+          <div className="flex justify-between mb-3">
             <span className="text-[#ff4b22]">Subtotal</span>
             <span className="font-semibold text-[#ff4b22]">
               ${subtotal.toFixed(2)}
@@ -198,7 +126,7 @@ export default function MyBag({ open, onClose }) {
 
           <Button
             onClick={() => {
-              onClose();
+              closeBag();
               router.push("/checkout");
             }}
             className="w-full py-6 rounded-full bg-[#ff4b22] text-white hover:bg-white hover:text-[#ff4b22] border border-[#ff4b22]"
@@ -210,3 +138,4 @@ export default function MyBag({ open, onClose }) {
     </Sheet>
   );
 }
+

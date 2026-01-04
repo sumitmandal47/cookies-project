@@ -3,11 +3,13 @@
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-
 import cookie1 from "@/app/assets/images/cookie1.png";
-
+import { medusa } from "@/lib/medusa";
 export default function CheckoutContent() {
   const router = useRouter();
+  medusa.orders.requestCustomerOrders({
+  
+  })
 
   const {
     register,
@@ -21,13 +23,13 @@ export default function CheckoutContent() {
 
   const onSubmit = (data) => {
     console.log("Checkout Data:", data);
-    router.push("/delivery"); // ✅ Next.js navigation
+    router.push("/delivery");
   };
 
   return (
     <div className="bg-[#fff6e6] min-h-screen py-10 px-4">
       <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-10">
-        {/* LEFT : FORM */}
+      
         <div className="md:col-span-2">
           <h1 className="text-5xl md:text-6xl font-serif text-[#ff4b22] mb-8 border-b border-[#ff4b22] pb-4">
             Checkout
@@ -38,7 +40,7 @@ export default function CheckoutContent() {
           </h2>
 
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* NAME */}
+            
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <input

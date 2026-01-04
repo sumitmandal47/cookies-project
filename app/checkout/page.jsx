@@ -1,13 +1,25 @@
 
+
 "use client";
 
 import { useForm } from "react-hook-form";
 import { useState } from "react";
-import Image from "next/image";
-import cookie1 from "@/app/assets/images/cookie1.png";
+import { useCartStore } from "../../store/useCartStore";
 
 export default function CheckoutContent() {
   const [checkoutData, setCheckoutData] = useState(null);
+
+  // ✅ CART FROM ZUSTAND
+  const cart = useCartStore((s) => s.cart);
+  const items = cart?.items || [];
+
+  const subtotalCents = items.reduce(
+    (sum, item) => sum + item.unit_price * item.quantity,
+    0
+  );
+  const subtotal = subtotalCents / 100;
+  const shipping = items.length > 0 ? 5 : 0;
+  const total = subtotal + shipping;
 
   const {
     register,
@@ -31,13 +43,13 @@ export default function CheckoutContent() {
   return (
     <div className="bg-[#fff7e8] min-h-screen py-10 px-4 md:px-8">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-3 gap-12">
-        {/* LEFT */}
+        
         <div className="lg:col-span-2">
           <h1 className="text-6xl font-serif text-[#ff4b22] border-b mb-6">
             Checkout
           </h1>
 
-          {/* SHIPPING SUMMARY */}
+          
           {checkoutData && (
             <div className="border border-[#ff4b22] rounded-xl p-6 mb-6 bg-[#fffcf5]">
               <div className="flex justify-between items-start">
@@ -51,31 +63,30 @@ export default function CheckoutContent() {
                   Edit
                 </button>
               </div>
+
               <div className="flex justify-between items-center p-5">
-                <div className="mt-4 space-y-1 text-[#ff4b22] ">
+                <div className="mt-4 space-y-1 text-[#ff4b22]">
                   <p className="font-semibold">
                     {checkoutData.firstName} {checkoutData.lastName}
                   </p>
-                  <p>
-                    {checkoutData.address}
-                    {checkoutData.apartment && `, ${checkoutData.apartment}`}
-                  </p>
+                  <p>{checkoutData.address}</p>
                   <p>
                     {checkoutData.city}, {checkoutData.state}{" "}
                     {checkoutData.postalCode}
                   </p>
                   <p>{checkoutData.country}</p>
                 </div>
+
                 <div className="text-[#ff4b22]">
-                  <p className="text-3xl text-[#ff4b22]">Contect</p>
-                  <p className="mt-2 "> {checkoutData.email}</p>
-                  {checkoutData.phone && <p> {checkoutData.phone}</p>}
+                  <p className="text-2xl">Contact</p>
+                  <p className="mt-2">{checkoutData.email}</p>
+                  {checkoutData.phone && <p>{checkoutData.phone}</p>}
                 </div>
               </div>
             </div>
           )}
 
-          {/* FORM */}
+          
           {!checkoutData && (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               <div className="grid md:grid-cols-2 gap-5">
@@ -150,11 +161,7 @@ export default function CheckoutContent() {
               </div>
 
               <div className="flex items-center gap-3">
-                <input
-                  type="checkbox"
-                  {...register("sameBilling")}
-                  className="accent-[#ff4b22]"
-                />
+                <input type="checkbox" {...register("sameBilling")} />
                 <label className="text-[#ff4b22]">
                   Billing address same as shipping
                 </label>
@@ -177,7 +184,7 @@ export default function CheckoutContent() {
 
               <button
                 type="submit"
-                className="bg-[#ff4b22] text-white px-10 py-4 rounded-full font-bold text-lg hover:bg-[#e0411d]"
+                className="bg-[#ff4b22] text-white px-10 py-4 rounded-full font-bold text-lg"
               >
                 Continue to delivery
               </button>
@@ -185,44 +192,51 @@ export default function CheckoutContent() {
           )}
         </div>
 
-        {/* RIGHT */}
         <div className="lg:col-span-1">
           <div className="sticky top-10 border border-[#ff4b22] rounded-xl p-8 bg-[#fffcf5]">
             <h2 className="text-4xl font-serif text-[#ff4b22] mb-6">
               Order details
             </h2>
 
-            <div className="flex gap-4 border-b pb-6 mb-6">
-              <Image
-                src={cookie1}
-                alt="Cookie"
-                width={80}
-                height={80}
-                className="rounded-lg"
-              />
-              <div className="flex-1">
-                <p className="font-bold text-[#ff4b22]">
-                  Peanut Butter Chocolate Chip
+            {items.length === 0 && (
+              <p className="text-[#ff4b22]">Your bag is empty</p>
+            )}
+
+            {items.map((item) => (
+              <div key={item.id} className="flex gap-4 border-b pb-6 mb-6">
+                <img
+                  src={item.thumbnail}
+                  alt={item.title}
+                  className="w-20 h-20 rounded-lg object-cover border"
+                />
+
+                <div className="flex-1">
+                  <p className="font-bold text-[#ff4b22]">{item.title}</p>
+                  <p className="text-sm text-[#ff4b22]/80">
+                    Qty: {item.quantity}
+                  </p>
+                </div>
+
+                <p className="font-semibold text-[#ff4b22]">
+                  ${((item.unit_price * item.quantity) / 100).toFixed(2)}
                 </p>
-                <p className="text-sm text-[#ff4b22]/80">4-Pack</p>
               </div>
-              <p className="font-semibold text-[#ff4b22]">$5.98</p>
-            </div>
+            ))}
 
             <div className="space-y-3 text-[#ff4b22]">
               <div className="flex justify-between">
                 <span>Subtotal</span>
-                <span>$5.98</span>
+                <span>${subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span>Shipping</span>
-                <span>$5.00</span>
+                <span>${shipping.toFixed(2)}</span>
               </div>
             </div>
 
             <div className="border-t mt-4 pt-4 flex justify-between text-2xl font-bold text-[#ff4b22]">
               <span>Total</span>
-              <span>$10.98</span>
+              <span>${total.toFixed(2)}</span>
             </div>
           </div>
         </div>

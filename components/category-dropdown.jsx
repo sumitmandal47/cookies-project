@@ -65,6 +65,7 @@ const handleChange = (selected) => {
   router.replace(`?${params.toString()}`, { scroll: false });
 };
 
+
   const CheckboxOption = (props) => {
     return (
       <components.Option {...props}>
@@ -84,6 +85,7 @@ const handleChange = (selected) => {
     <div className="w-64 bg-[#fff6e6]">
       <Select
         // instanceId="category-select"
+       
         isMulti
         options={options}
         value={selectedCategories}

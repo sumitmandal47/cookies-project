@@ -1,46 +1,56 @@
 import { create } from "zustand";
+import { medusa } from "../lib/medusa";
 
 export const useCartStore = create((set, get) => ({
+  cart: null,
   isBagOpen: false,
-
-  cart: [],
 
   openBag: () => set({ isBagOpen: true }),
   closeBag: () => set({ isBagOpen: false }),
 
-  addToCart: (item) => {
-    const cart = get().cart;
-    const existing = cart.find((i) => i.id === item.id);
+  getOrCreateCart: async () => {
+    let cart = get().cart;
 
-    if (existing) {
-      set({
-        cart: cart.map((i) =>
-          i.id === item.id ? { ...i, qty: i.qty + 1 } : i
-        ),
-        isBagOpen: true,
-      });
-    } else {
-      set({
-        cart: [...cart, { ...item, qty: 1 }],
-        isBagOpen: true,
-      });
+    if (!cart) {
+      const { cart: newCart } = await medusa.carts.create();
+      set({ cart: newCart });
+      return newCart;
     }
+
+    return cart;
   },
 
-  increaseQty: (id) =>
-    set((state) => ({
-      cart: state.cart.map((i) => (i.id === id ? { ...i, qty: i.qty + 1 } : i)),
-    })),
+  addToCart: async (variantId, quantity = 1) => {
+    const cart = await get().getOrCreateCart();
 
-  decreaseQty: (id) =>
-    set((state) => ({
-      cart: state.cart.map((i) =>
-        i.id === id && i.qty > 1 ? { ...i, qty: i.qty - 1 } : i
-      ),
-    })),
+    const { cart: updatedCart } = await medusa.carts.lineItems.create(cart.id, {
+      variant_id: variantId,
+      quantity,
+    });
 
-  removeItem: (id) =>
-    set((state) => ({
-      cart: state.cart.filter((i) => i.id !== id),
-    })),
+    set({ cart: updatedCart, isBagOpen: true });
+  },
+
+  updateQty: async (lineId, quantity) => {
+    const cart = get().cart;
+
+    const { cart: updatedCart } = await medusa.carts.lineItems.update(
+      cart.id,
+      lineId,
+      { quantity }
+    );
+
+    set({ cart: updatedCart });
+  },
+
+  removeItem: async (lineId) => {
+    const cart = get().cart;
+
+    const { cart: updatedCart } = await medusa.carts.lineItems.delete(
+      cart.id,
+      lineId
+    );
+
+    set({ cart: updatedCart });
+  },
 }));
