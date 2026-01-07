@@ -33,7 +33,8 @@ const CookiesBox = () => {
 
             <PlusIcon className="top-[40%] left-[45%]" />
             <PlusIcon className="top-[25%] left-[65%]" />
-            <PlusIcon className="top-[55%] left-[30%]" />
+            <PlusIcon className="top-[70%] left-[20%]" />
+            <PlusIcon className="top-[55%] left-[80%]" />
           </div>
         </div>
 
@@ -104,3 +105,4 @@ const PlusIcon = ({ className }) => (
     <Plus size={18} />
   </span>
 );
+
