@@ -1,7 +1,7 @@
 import { CardContent } from "@/components/ui/card";
 import { medusa } from "../../lib/medusa";
-import CategoryDropdown from "../../components/category-dropdown";
-import CollectionDropdown from "../../components/collections";
+import CategoryDropdown from "../../components/CategoryDropdown";
+import CollectionDropdown from "../../components/CollectionsDropdown";
 import Link from "next/link";
 import ClearFilterButton from "../../components/ClearFilterButton";
 
@@ -29,8 +29,6 @@ export default async function Products({ searchParams}) {
   }
   
   // console.log(JSON.stringify(products, null, 2));
-
-
 
   return (
     <div className="bg-[#fff6e6] min-h-screen p-8">

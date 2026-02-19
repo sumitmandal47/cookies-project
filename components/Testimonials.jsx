@@ -5,7 +5,7 @@ import {
   CarouselItem,
 } from "@/components/ui/carousel";
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Quote, Star, User } from "lucide-react";
+import { ChevronLeft, ChevronRight, User } from "lucide-react";
 
 const testimonials = [
   {
@@ -44,18 +44,14 @@ export function Testimonials() {
   return (
     <div className="w-full py-20 bg-[#fff6e6]">
       <Carousel setApi={setApi} className="w-full px-4 mx-auto max-w-7xl">
-        {/* Header Section */}
+    
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
           <div className="space-y-2">
-            <span className="text-[#ff4b22] font-semibold tracking-wider uppercase text-sm">
-              Community Love
-            </span>
+  
             <h2 className="text-4xl md:text-6xl font-serif text-[#ff4b22]">
               Testimonials
             </h2>
           </div>
-
-          {/* Navigation Buttons */}
           <div className="flex gap-3">
             <button
               onClick={prev}
@@ -74,22 +70,15 @@ export function Testimonials() {
           </div>
         </div>
 
-        {/* Carousel Cards */}
         <CarouselContent className="-ml-4">
           {testimonials.map((testimonial, i) => (
             <CarouselItem key={i} className="pl-4 md:basis-1/2 lg:basis-1/3">
               <div className="h-full">
                 <Card className="border border-[#ff4b22]/20 rounded-2xl h-full bg-[#fff6e6] hover:shadow-lg transition-shadow duration-300">
-                  <CardContent className="flex flex-col justify-between h-full p-8">
-                    {/* Top: Stars & Icon */}
-                   
-
-                
+                  <CardContent className="flex flex-col justify-between h-full p-8">             
                     <p className="text-lg text-[#ff4b22]/80 font-medium leading-relaxed mb-8">
                       {testimonial.text}
                     </p>
-
-                  
                     <div className="flex items-center gap-4 mt-auto">
                       <div className="w-10 h-10 rounded-full bg-[#ff4b22]/10 flex items-center justify-center">
                         <User className="text-[#ff4b22] w-5 h-5" />

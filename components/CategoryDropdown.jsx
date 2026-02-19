@@ -1,5 +1,3 @@
-
-
 "use client";
 import { components } from "react-select";
 import { useEffect, useState } from "react";
@@ -11,12 +9,9 @@ function CategoryDropdown() {
   const [options, setOptions] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-
   const searchParams = useSearchParams();
   const productCategories = searchParams.get("productCategories");
-
   const router = useRouter();
-
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
@@ -40,31 +35,27 @@ function CategoryDropdown() {
 
   useEffect(() => {
     if (!productCategories || options.length === 0) return;
-
     const idsFromUrl = productCategories.split(",");
-
     const matched = options.filter((opt) => idsFromUrl.includes(opt.value));
 
-  // eslint-disable-next-line react-hooks/set-state-in-effect
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSelectedCategories(matched);
   }, [productCategories, options]);
-const handleChange = (selected) => {
-  const values = selected || [];
-  setSelectedCategories(values);
+  const handleChange = (selected) => {
+    const values = selected || [];
+    setSelectedCategories(values);
 
-  const selectedIds = values.map((item) => item.value);
-  const params = new URLSearchParams(searchParams.toString());
+    const selectedIds = values.map((item) => item.value);
+    const params = new URLSearchParams(searchParams.toString());
 
-  if (selectedIds.length > 0) {
-    params.set("productCategories", selectedIds.join(","));
+    if (selectedIds.length > 0) {
+      params.set("productCategories", selectedIds.join(","));
+    } else {
+      params.delete("productCategories");
+    }
 
-  } else {
-    params.delete("productCategories");
-  }
-
-  router.replace(`?${params.toString()}`, { scroll: false });
-};
-
+    router.replace(`?${params.toString()}`, { scroll: false });
+  };
 
   const CheckboxOption = (props) => {
     return (
@@ -85,7 +76,7 @@ const handleChange = (selected) => {
     <div className="w-64 bg-[#fff6e6]">
       <Select
         // instanceId="category-select"
-       
+
         isMulti
         options={options}
         value={selectedCategories}
@@ -103,4 +94,3 @@ const handleChange = (selected) => {
 }
 
 export default CategoryDropdown;
-
